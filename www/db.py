@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import uuid,time, logging
+import uuid, time, log
 
 
 class Dict(dict):
@@ -17,7 +17,7 @@ class Dict(dict):
     '''
 
     def __getattr__(self, key):
-        #print '__getattr__ call'
+        # print '__getattr__ call'
         try:
             return self[key]
         except KeyError:
@@ -36,12 +36,11 @@ def next_id(t=None):
 def profiling(start, sql=''):
     t = time.time() - start
     if t > 0.1:
-        logging.warning('[PROFILING] [DB] %s: %s' % (t, sql))
+        log.warning('[PROFILING] [DB] %s: %s' % (t, sql))
     else:
-        logging.info('[PROFILING] [DB] %s: %s' % (t, sql))
-
+        log.info('[PROFILING] [DB] %s: %s' % (t, sql))
 
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %I:%M:%S')
-    start = time.time() - 10
-    profiling(start)
+    profiling(time.time())
+
+
