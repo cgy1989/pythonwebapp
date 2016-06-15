@@ -21,7 +21,7 @@ class LogConfig(object):
     def InitLogger(self):
         return self.__logger
 
-logger = LogConfig('web_py').InitLogger()
+loggerWrapper = LogConfig('web_py').InitLogger()
 
 
 if __name__ == '__main__':

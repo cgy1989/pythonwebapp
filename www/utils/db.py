@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from log import logger as log
+from log import loggerWrapper as log
 import time
 import uuid
 import threading
@@ -296,18 +296,11 @@ def insert(table, **kwargs):
 def update(sql, *args):
     return _update(sql, *args)
 
-'''
-test transaction code
-@with_transaction
-def some_work():
-    u = dict(name='chen', email='chen@test.org', passwd='chen', last_modified=time.time())
-    insert('user', **u)
-    update('update user set name="suhong" where id = 105')
-'''
 
 if __name__ == '__main__':
     create_engine('root', 'root', 'mytestdb')
-    u = dict(name='chen', email='chen@test.org', passwd='chen', last_modified=time.time())
-    insert('user', **u)
+    u = select_one('select * from user where id=?', 123)
+    print u
+
 
 
