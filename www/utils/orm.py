@@ -125,7 +125,7 @@ class ModelMetaClass(type):
         mappings = dict()
         primary_key = None
         for k, v in attrs.iteritems():
-            if isinstance(v.Field):
+            if isinstance(v, Field):
                 if not v.name:
                     v.name = k
                 log.info('Found mapping: %s => %s' % (k, v))
@@ -250,7 +250,7 @@ class Model(dict):
         self.pre_insert and self.pre_insert()
         params = {}
         for k, v in self.__mappings__.iteritems():
-            if v.insertable:
+            if v.writable:
                 if not hasattr(self, k):
                     setattr(self, k, v.default)
                 params[v.name] = getattr(self, k)
@@ -258,6 +258,15 @@ class Model(dict):
         return self
 
 
+class User(Model):
+    id = IntegerField(primary_key=True)
+    name = StringField()
+    email = StringField(writable=False)
+    last_modified = FloatField()
+
+    def pre_insert(self):
+        self.last_modified = time.time()
+
+
 if __name__ == '__main__':
-    print dir(Model)
-    pass
+    db.create_engine('root', 'root', 'mytestdb')

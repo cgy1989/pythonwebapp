@@ -13,7 +13,7 @@ class Dict(dict):
     def __init__(self, names=(), values=(), **kwargs):
         super(Dict, self).__init__(**kwargs)
         for k, v in zip(names, values):
-            self[k] = v;
+            self[k] = v
 
     '''
     def __getattribute__(self, key):
@@ -236,6 +236,7 @@ def with_transaction(func):
 def _select(sql, first, *args):
     global _db_ctx
     cursor = None
+    names = []
     sql = sql.replace('?', '%s')
     log.info('SQL: %s, ARGS: %s', sql, args)
     try:
