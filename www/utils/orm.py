@@ -258,15 +258,20 @@ class Model(dict):
         return self
 
 
-class User(Model):
-    id = IntegerField(primary_key=True)
-    name = StringField()
-    email = StringField(writable=False)
-    last_modified = FloatField()
-
-    def pre_insert(self):
-        self.last_modified = time.time()
-
-
 if __name__ == '__main__':
     db.create_engine('root', 'root', 'mytestdb')
+
+    class User(Model):
+        id = IntegerField(primary_key=True)
+        name = StringField()
+        email = StringField(writable=False)
+        last_modified = FloatField()
+
+        def pre_insert(self):
+            self.last_modified = time.time()
+
+    class subUser(User):
+        id = IntegerField(primary_key=True)
+
+    class subUser2(subUser):
+        id = IntegerField(primary_key=True)

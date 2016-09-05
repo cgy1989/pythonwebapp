@@ -5,11 +5,11 @@ import logging
 import logging.handlers
 import os
 
-app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../' + os.pardir))
 
 
 class LogConfig(object):
-    def __init__(self, log_name='', file_name=app_path + '/log/inspect_data.log'):
+    def __init__(self, log_name='', file_name=app_path + '/log/web.log'):
         self.__logger = logging.getLogger(log_name)
         self.__logger.setLevel(logging.DEBUG)
         # fh = logging.FileHandler(file_name)
@@ -37,3 +37,5 @@ logging.info(....)
 
 if __name__ == '__main__':
     pass
+
+

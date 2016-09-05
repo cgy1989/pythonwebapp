@@ -237,6 +237,7 @@ def _select(sql, first, *args):
     global _db_ctx
     cursor = None
     names = []
+    # 这样的方式完全防止不了sql注入
     sql = sql.replace('?', '%s')
     log.info('SQL: %s, ARGS: %s', sql, args)
     try:
@@ -269,6 +270,7 @@ def select(sql, *args):
 def _update(sql, *args):
     global _db_ctx
     cursor = None
+    # 这样的方式完全防止不了sql注入
     sql = sql.replace('?', '%s')
     log.info('SQL: %s, ARGS: %s' % (sql, args))
     try:
@@ -300,8 +302,7 @@ def update(sql, *args):
 
 if __name__ == '__main__':
     create_engine('root', 'root', 'mytestdb')
-    u = select_one('select * from user where id=?', 123)
-    print u
+    
 
 
 
